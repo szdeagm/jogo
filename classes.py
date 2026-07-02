@@ -5,14 +5,14 @@ class Tela():
 
 
 class Personagens():
-    def __init__(self): #Uxie
-        self.uxie_frente = image.load("uxie_frente.png")
-        self.uxie_frente = transform.scale(self.uxie_frente, (300,300))
-        self.uxie_tras = image.load("uxie_tras.png")
-        self.uxie_tras = transform.scale(self.uxie_tras, (300,300))
-        self.uxie_direita = image.load("uxie_direita.png")
-        self.uxie_direita = transform.scale(self.uxie_direita, (300,300))
-        self.uxie_esquerda = image.load("uxie_esquerda.png")
-        self.uxie_esquerda = transform.scale(self.uxie_esquerda, (300,300))
+    def __init__(self): #gatoprota
+        self.gatoprota_frente = image.load("gatoprota_frente.png")
+        self.gatoprota_frente = transform.scale(self.gatoprota_frente, (300,300))
+        self.gatoprota_tras = image.load("gatoprota_tras.png")
+        self.gatoprota_tras = transform.scale(self.gatoprota_tras, (300,300))
+        self.gatoprota_direita = image.load("gatoprota_direita.png")
+        self.gatoprota_direita = transform.scale(self.gatoprota_direita, (300,300))
+        self.gatoprota_esquerda = image.load("gatoprota_esquerda.png")
+        self.gatoprota_esquerda = transform.scale(self.gatoprota_esquerda, (300,300))
         self.skin = Surface((10,10))
         self.skin.fill((0,0,0))
