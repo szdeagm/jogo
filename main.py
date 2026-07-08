@@ -11,6 +11,7 @@ fps = time.Clock()
 vidaprota = 100
 vidaoponente = 50
 vidadracula = 200
+placar = 0
 
 while rodando:
     fps.tick(60)
@@ -31,6 +32,9 @@ while rodando:
             if e.key == K_RIGHT:
                 prota.change_to = "RIGHT"
                 prota.protapos = (prota.protapos[0] + 15, prota.protapos[1])
+    cenario = image.load("cenarioluta1.png")
+    cenario = transform.scale(cenario, (600,600))
+    tela.blit(cenario, (0, 0))
     tela.blit(prota.protaskin, prota.protapos)
     display.update()
 
