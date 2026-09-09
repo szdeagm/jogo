@@ -13,7 +13,7 @@ vidaoponente = 50
 vidadracula = 200
 placar = 0
 fonte = font.SysFont("Courier", 20)
-cenario = image.load("cenarioluta1.png")
+cenario = image.load("imagens/cenarioluta1.png")
 cenario = transform.scale(cenario, (600,600))
 tela.blit(cenario, (0, 0))
 tela.blit(prota.protaskin, prota.protapos)
@@ -26,7 +26,7 @@ while rodando:
             rodando = False
         elif e.type == KEYDOWN:
             tela.fill((0,0,0))
-            cenario = image.load("cenarioluta1.png")
+            cenario = image.load("imagens/cenarioluta1.png")    
             cenario = transform.scale(cenario, (600,600))
             tela.blit(cenario, (0, 0))
             
