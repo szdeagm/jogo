@@ -1,5 +1,5 @@
 from pygame import *
-
+import random
 
 class Prota():
     def __init__(self): #gatoprota 
@@ -16,3 +16,13 @@ class Prota():
         self.protaskin.fill((255,0,0))
         self.direction = "up"
         self.change_to = self.direction
+
+
+x = random.randint(40, 560)
+y = 0
+
+class flor():
+    def __init__(self):
+        self.flor = image.load("imagens/flor.png")
+        self.flor = transform.scale(self.flor, (60,60))
+        self.florpos = (x,y)

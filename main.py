@@ -3,6 +3,7 @@ from classes import *
 
 init()
 
+flor = flor()
 prota = Prota()
 tela = display.set_mode((600,600))
 display.set_caption("CastleCat: Em busca da dignidade do povo felino")
@@ -20,6 +21,7 @@ cenario = transform.scale(cenario, (600,600))
 tela.blit(cenario, (0, 0))
 tela.blit(prota.protaskin, prota.protapos)
 tela.blit(prota.gatoprota, (prota.protapos[0] -20, prota.protapos[1] - 20))
+
 
 while rodando:
     fps.tick(60) # Aumentei para 60 para o movimento ficar muito mais liso
@@ -66,6 +68,10 @@ while rodando:
     elif prota.change_to == "RIGHT":
         tela.blit(prota.protaskin, prota.protapos)
         tela.blit(prota.gatoprota_direita, (prota.protapos[0] - 20, prota.protapos[1] - 20))
+
+    #inimigos
+    tela.blit(flor.flor, flor.florpos)
+    
 
     # Texto do Placar e Vida
     texto = fonte.render("Placar: " + str(placar), True, (255,255,255))
