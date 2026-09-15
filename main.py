@@ -71,7 +71,12 @@ while rodando:
 
     #inimigos
     tela.blit(flor.flor, flor.florpos)
-    
+    if flor.florpos[1] > 600:
+        x = random.randint(40, 560)
+        y = 0
+        flor.florpos = (x,y)
+    y = flor.florpos[1] + 2
+    flor.florpos = (flor.florpos[0], y)
 
     # Texto do Placar e Vida
     texto = fonte.render("Placar: " + str(placar), True, (255,255,255))

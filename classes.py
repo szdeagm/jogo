@@ -3,6 +3,7 @@ import random
 
 class Prota():
     def __init__(self): #gatoprota 
+        self.rect = Rect(300, 300, 30, 50)
         self.gatoprota = image.load("imagens/gatoprotafrente.png")
         self.gatoprota = transform.scale(self.gatoprota, (70,85))
         self.gatoprota_tras = image.load("imagens/gatoprota_tras.png")
@@ -18,7 +19,7 @@ class Prota():
         self.change_to = self.direction
 
 
-x = random.randint(40, 560)
+x = random.randint(40, 500)
 y = 0
 
 class flor():
@@ -26,3 +27,17 @@ class flor():
         self.flor = image.load("imagens/flor.png")
         self.flor = transform.scale(self.flor, (60,60))
         self.florpos = (x,y)
+
+class Tiro:
+    def __init__(self, x, y, dx, dy):
+        self.rect = Rect(x, y, 8, 8)
+        self.velocidade = 8
+        self.dx = dx
+        self.dy = dy
+
+    def atualizar(self):
+        self.rect.x += self.dx * self.velocidade
+        self.rect.y += self.dy * self.velocidade
+
+    def desenhar(self, superficie):
+        pygame.draw.rect(superficie, (255, 0, 0), self.rect)
