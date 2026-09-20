@@ -18,9 +18,18 @@ class Prota():
         self.direction = "up"
         self.change_to = self.direction
 
-
+#flor
 x = random.randint(40, 500)
-y = 0
+y = 600
+#libelula
+dx = 0
+dy = random.randint(40, 500)
+
+fx = 600
+fy = random.randint(40, 500)
+
+bx = random.randint(40, 500)
+by = 0
 
 class flor():
     def __init__(self):
@@ -28,16 +37,54 @@ class flor():
         self.flor = transform.scale(self.flor, (60,60))
         self.florpos = (x,y)
 
-class Tiro:
-    def __init__(self, x, y, dx, dy):
-        self.rect = Rect(x, y, 8, 8)
+class libelula():
+    def __init__(self):
+        self.libelula = image.load("imagens/libelula.png")
+        self.libelula = transform.scale(self.libelula, (60,60))
+        self.libelulapos = (dx,dy)
+
+class libelula2():
+    def __init__(self):
+        self.libelula2 = image.load("imagens/libelula2.png")
+        self.libelula2 = transform.scale(self.libelula2, (60,60))
+        self.libelula2pos = (fx,fy)
+
+class morcego():
+    def __init__(self):
+        self.morcego = image.load("imagens/morceguinho.png")
+        self.morcego = transform.scale(self.morcego, (85,60))
+        self.morcegopos = (bx,by)
+
+class Tiro():
+    def __init__(self, x, y, direcao):
+        self.direcao = direcao.upper()    # "UP", "DOWN", "LEFT", "RIGHT"
         self.velocidade = 8
-        self.dx = dx
-        self.dy = dy
+
+        
+        if direcao in ("UP", "DOWN"):
+            self.tiro = image.load("imagens/olho.png")
+            self.tiro = transform.scale(self.tiro, (18, 26))
+        else:
+            self.tiro = image.load("imagens/olho.png")
+            self.tiro = transform.scale(self.tiro, (26, 18))
+      # vermelho
+
+        # Posição inicial centralizada no personagem
+        self.rect = self.tiro.get_rect(center=(x, y))
 
     def atualizar(self):
-        self.rect.x += self.dx * self.velocidade
-        self.rect.y += self.dy * self.velocidade
+        if self.direcao == "UP":
+            self.rect.y -= self.velocidade
+        elif self.direcao == "DOWN":
+            self.rect.y += self.velocidade
+        elif self.direcao == "LEFT":
+            self.rect.x -= self.velocidade
+        elif self.direcao == "RIGHT":
+            self.rect.x += self.velocidade
 
-    def desenhar(self, superficie):
-        pygame.draw.rect(superficie, (255, 0, 0), self.rect)
+    def desenhar(self, tela):
+        tela.blit(self.tiro, self.rect)
+
+    def fora_da_tela(self):
+        return (self.rect.right < 0 or self.rect.left > 600 or
+                self.rect.bottom < 0 or self.rect.top > 600)
