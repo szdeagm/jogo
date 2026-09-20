@@ -7,9 +7,9 @@ import asyncio
 async def main():
     init()
 
-    libelula = libelula()
+    libelula = lib()
     lib2 = libelula2()
-    flor = flor()
+    flor = fllor()
     bat = morcego()
     prota = Prota()
     LARGURA, ALTURA = 600, 600
@@ -39,6 +39,7 @@ async def main():
     PRETO = (0, 0, 0)
     BRANCO = (255, 255, 255)
     VERDE = (0, 255, 0)
+    VERMELHO = (255, 0, 0)
 
     # Fonte
     fonte_titulo = font.SysFont("Courier", 50, bold=True)
@@ -46,7 +47,7 @@ async def main():
 
 
 
-    def exibir_tela_vitoria():
+    async def exibir_tela_vitoria():
         """Loop exclusivo para a tela de vitória."""
         executando_win = True
         
@@ -75,6 +76,40 @@ async def main():
                         
             display.flip()
             fps.tick(60)
+            await asyncio.sleep(0) 
+
+    async def exibir_tela_derrota():
+        """Loop exclusivo para a tela de derrota."""
+        executando_derrota = True
+
+        while executando_derrota:
+            tela.fill(PRETO)
+            
+            # Renderização dos textos
+            texto_ganhou = fonte_titulo.render("VOCÊ PERDEU!", True, VERMELHO)
+            texto_placar = fonte_subtitulo.render(f"Seu placar foi {placar}", True, BRANCO)
+            texto_instrucao = fonte_subtitulo.render("Pressione ESPAÇO para reiniciar ou ESC para sair", True, BRANCO)
+            
+            # Centralizando os textos na tela
+            tela.blit(texto_ganhou, (LARGURA // 2 - texto_ganhou.get_width() // 2, ALTURA // 3))
+            tela.blit(texto_placar, (LARGURA // 2 - texto_placar.get_width() // 2, ALTURA // 2 + 50))
+            tela.blit(texto_instrucao, (LARGURA // 2 - texto_instrucao.get_width() // 2, ALTURA // 2 + 100))
+            
+            # Captura de eventos na tela de derrota
+            for evento in event.get():
+                if evento.type == QUIT:
+                    quit()
+                    sys.exit()
+                if evento.type == KEYDOWN:
+                    if evento.key == K_SPACE:
+                        executando_derrota = False  # Sai da tela de derrota e volta ao jogo
+                    if evento.key == K_ESCAPE:
+                        quit()
+                        sys.exit()
+                        
+            display.flip()
+            fps.tick(60)
+            await asyncio.sleep(0) 
 
 
     while rodando:
@@ -91,9 +126,24 @@ async def main():
                 cy = prota.protapos[1] + 25      # centro vertical do gato
                 tiros.append(Tiro(cx, cy, prota.change_to))
 
-            if placar >= 150:
-                exibir_tela_vitoria()
+        if placar >= 150:
+                await exibir_tela_vitoria()
                 # Reinicia o jogo após a tela de vitória
+                vidaprota = 5
+                vida_bat = 1
+                vida_flor = 1
+                vida_libelula = 1
+                vida_libelula2 = 1
+                placar = 0
+                prota.protapos = (300, 300)
+                flor.florpos = (random.randint(40, 560), 600)
+                libelula.libelulapos = (0, random.randint(40, 560))
+                lib2.libelula2pos = (600, random.randint(40, 560))
+                bat.morcegopos = (random.randint(40, 560), 0)
+            
+        if vidaprota == 0:
+                await exibir_tela_derrota()
+                # Reinicia o jogo após a tela de derrota
                 vidaprota = 5
                 vida_bat = 1
                 vida_flor = 1
@@ -253,8 +303,7 @@ async def main():
         if prota.protaskin.get_rect(topleft=prota.protapos).colliderect(bat.morcego.get_rect(topleft=bat.morcegopos)):
             vidaprota -= 1
             bat.morcegopos = (random.randint(40, 560), 0)
-        if vidaprota == 0:
-            rodando = False
+ 
 
         # ---------------- HUD ----------------
         texto = fonte.render("Placar: " + str(placar), True, (255, 255, 255))
@@ -266,4 +315,4 @@ async def main():
 
     quit()
 
-syncio.run(main()) 
+asyncio.run(main()) 

@@ -31,13 +31,13 @@ fy = random.randint(40, 500)
 bx = random.randint(40, 500)
 by = 0
 
-class flor():
+class fllor():
     def __init__(self):
         self.flor = image.load("imagens/flor.png")
         self.flor = transform.scale(self.flor, (60,60))
         self.florpos = (x,y)
 
-class libelula():
+class lib():
     def __init__(self):
         self.libelula = image.load("imagens/libelula.png")
         self.libelula = transform.scale(self.libelula, (60,60))
